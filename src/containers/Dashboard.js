@@ -146,11 +146,19 @@ export default class {
     }
 
     bills.forEach(bill => {
-      $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
-    })
+      //debeug click event freeze the selection list of bills
+      $(`#status-bills-container${this.index} #open-bill${bill.id}`).click((e) => {
+
+        this.handleEditTicket(e, bill, bills);
+
+        console.log(`Clicked : "${bill.name}"`);
+
+      });
+
+      
+    });
 
     return bills
-
   }
 
   getBillsAllUsers = () => {

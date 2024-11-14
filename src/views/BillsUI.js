@@ -4,8 +4,13 @@ import LoadingPage from "./LoadingPage.js"
 
 import Actions from './Actions.js'
 
+
+
+
 const row = (bill) => {
-  return (`
+
+
+   return (`
     <tr>
       <td>${bill.type}</td>
       <td>${bill.name}</td>
@@ -20,10 +25,37 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+
+  console.log(data); 
+
+  if (data && data.length){
+
+    //debeug affichage Order by date
+    let subDatas = data.sort((a,b) => {
+      return a.date.localeCompare(b.date);
+    });
+
+
+    let datasSorted = subDatas.map((bill) => {
+    
+      return row(bill);
+
+    }).join("");
+
+  
+    return datasSorted;
+
+  } else {
+
+     return ""
+  }
+  
+
+  // return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
+
   
   const modal = () => (`
     <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -43,9 +75,13 @@ export default ({ data: bills, loading, error }) => {
   `)
 
   if (loading) {
+
     return LoadingPage()
+    
   } else if (error) {
+
     return ErrorPage(error)
+    
   }
   
   return (`
