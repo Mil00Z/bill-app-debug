@@ -24,34 +24,38 @@ const row = (bill) => {
     `)
   }
 
-const rows = (data) => {
+// const rows = (data) => {
 
-  console.log(data); 
+//   console.log(data); 
 
-  if (data && data.length){
+//   if (data && data.length){
 
-    //debeug affichage Order by date
-    let subDatas = data.sort((a,b) => {
-      return a.date.localeCompare(b.date);
-    });
+//     //debeug affichage Order by date
+//     let subDatas = data.sort((a,b) => {
+//       return a.date.localeCompare(b.date);
+//     });
 
 
-    let datasSorted = subDatas.map((bill) => {
+//     let datasSorted = subDatas.map((bill) => {
     
-      return row(bill);
+//       return row(bill);
 
-    }).join("");
+//     }).join("");
 
   
-    return datasSorted;
+//     return datasSorted;
 
-  } else {
+//   } else {
 
-     return ""
-  }
+//      return ""
+//   }
   
 
-  // return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+//   // return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+// }
+
+const rows = (data) => {
+  return (data && data.length) ? data.sort((a, b) => new Date(b.date) - new Date(a.date)).map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
