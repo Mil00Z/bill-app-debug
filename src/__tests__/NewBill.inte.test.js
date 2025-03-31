@@ -144,7 +144,7 @@ describe("Given :: I am connected as an employee", () => {
 
       document.body.innerHTML = NewBillUI();
 
-      const target = screen.getByLabelText("Justificatif");
+      const target = screen.getByTestId("file");
 
       let testFile = new File(["test"], "test.png", {type: "image/png"});
 
@@ -245,7 +245,7 @@ describe("Given :: I am connected as an employee", () => {
     });
 
 
-    test('#XY Then:: Using this Test because i dont know how to go ahead', async () => {
+    test('#XY Then:: Using this Test because i dont know how to go ahead more', async () => {
 
       //Définition du localstorage Windows (PK ?)
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
