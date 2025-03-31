@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event'
 
 
 import BillsUI from "../views/BillsUI.js"
-import { parseData,sortBillsByDate,formatDate} from '../views/BillsUI.js';
+import { parseData,sortBillsByDate} from '../views/BillsUI.js';
 import Bills from "../containers/Bills.js"
 import { bills } from "../fixtures/bills.js"
 import { ROUTES, ROUTES_PATH } from "../constants/routes"
@@ -16,7 +16,9 @@ import {localStorageMock} from "../__mocks__/localStorage.js";
 import mockStore from "../__mocks__/store.js";
 
 import router from "../app/Router.js";
-import { format } from 'path';
+// import { format } from 'path';
+
+import { formatDate } from "../app/format.js" 
 
 beforeEach(() => {
   // Voir si on peut factoriser des calls de chaques tests ?
@@ -58,8 +60,8 @@ describe("Given I am connected as an employee", () => {
         return a.innerHTML;
       });
 
-      console.log('❌ DATES MOCK FORMAT ❌');
-      console.log(JSON.stringify(datesMocked));
+      // console.log('❌ DATES MOCK FORMAT ❌');
+      // console.log(JSON.stringify(datesMocked));
      
 
       // Transformation du format des dates du mock pour coincider avec le FRONT et la demande de tris.
@@ -67,27 +69,23 @@ describe("Given I am connected as an employee", () => {
           return formatDate(date);
       });
 
-      console.log('👌DATES FORMATTED FOR FRONT UI AND TESTING👌');
-      console.log(mockedDatesTransfo);
+      // console.log('👌DATES FORMATTED FOR FRONT UI AND TESTING👌');
+      // console.log(mockedDatesTransfo);
 
     
-      let datesSorted = sortBillsByDate(mockedDatesTransfo);
+      // let datesSorted = sortBillsByDate(mockedDatesTransfo);
 
-      // const antiChrono = (a, b) => (a < b) ? 1 : -1);
+      const expectedDates = [...mockedDatesTransfo].sort((a, b) => {
+        return new Date(b) - new Date(a)
+      })
 
-      // const datesSorted = [...dates].sort((a, b) => {
-        
-      //   return Date.parse(b) - Date.parse(a);
       
-      // });
-      
-      console.log('✨ DATES ORDERED CORRECTLY ✨');
-      console.log(JSON.stringify(datesSorted));
+      // console.log('✨ DATES ORDERED CORRECTLY ✨');
+      // console.log(JSON.stringify(datesSorted));
 
 
-      expect(datesSorted).toEqual(mockedDatesTransfo);
-      expect(datesSorted).toBe(mockedDatesTransfo);
-
+      expect(expectedDates).toEqual(mockedDatesTransfo);
+    
     });
 
 
