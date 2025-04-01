@@ -20,6 +20,7 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
    
+    // Beug#3 : Verifier le type du fichier en plus de la restriction d'input
     const fileType = file.type.split('/');
     if (fileType[0] !== 'image' ){
 
