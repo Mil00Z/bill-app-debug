@@ -54,6 +54,7 @@ const row = (bill) => {
 //   // return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
 // }
 
+//Beug#1 Sort date By Desc
 const rows = (data) => {
   return (data && data.length) ? data.sort((a, b) => new Date(b.date) - new Date(a.date)).map(bill => row(bill)).join("") : ""
 }
