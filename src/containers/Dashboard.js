@@ -146,12 +146,12 @@ export default class {
     }
 
     bills.forEach(bill => {
-      //debeug click event freeze the selection list of bills
+      // Beug#4 : Précisition + forte sur le selecteur d'element HTML qui prend le click event (container et element)
       $(`#status-bills-container${this.index} #open-bill${bill.id}`).click((e) => {
 
         this.handleEditTicket(e, bill, bills);
 
-        console.log(`Clicked : "${bill.name}"`);
+        console.log(`Element Name : "${bill.name}", Container index : ${this.index}`);
 
       });
 
